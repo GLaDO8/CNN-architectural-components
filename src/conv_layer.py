@@ -29,6 +29,10 @@ def kernelToRow(inp_layer, kernel, out_height, out_width, stride = 1):
 
 if __name__ == "__main__":
     inp_layer = np.random.randint(3, size=(2, 4, 4))
+    print(inp_layer)
     kernel = np.random.randint(2, size = (4, 2, 3, 3))
+    print(kernel)
     image_col, out_height, out_width = imageToColumn(inp_layer, kernel.shape[2])
+    print(image_col)
     conv_out = kernelToRow(image_col, kernel, out_height, out_width)
+    print(conv_out)
