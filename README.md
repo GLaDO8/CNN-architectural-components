@@ -1,6 +1,6 @@
 # loopless CNN
 
-Numpy implementation of the convolution layer and pooling layer(max, min, avg etc). Works for multi-channel input and n-kernel layers. 
+Numpy implementation of the convolution layer and pooling layer(max, min, avg etc). Works with multi-channel input with padding and n-kernel layers. 
 
 **Pending improvements**
 * implement batch image convolutions
