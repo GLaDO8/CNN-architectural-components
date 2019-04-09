@@ -1,4 +1,4 @@
-#loopless CNN
+# loopless CNN
 
 Numpy implementation of the convolution layer and pooling layer(max, min, avg etc). Works for multi-channel input and n-kernel layers. 
 
