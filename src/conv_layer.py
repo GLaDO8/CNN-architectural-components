@@ -12,11 +12,13 @@ def conv_indices(inp_layer, kernel_size, stride = 1, padding = 0):
     rowm = np.repeat(np.arange(kernel_size), kernel_size)
     rowi = stride * np.repeat(np.arange(out_width), out_height)
 
+    #indices
     col_index = colm.reshape(1, -1) + coli.reshape(-1, 1)
     row_index = rowm.reshape(1, -1) + rowi.reshape(-1, 1)
     
     return col_index, row_index, out_height, out_width, C
 
+#image transformed into columns for matrix multiplication with kernel
 def imageToColumn(inp_layer, col_index, row_index, C):
     inp_col = np.transpose(np.squeeze(np.concatenate((np.vsplit(inp_layer[:, row_index, col_index], C)), axis = 2)))
     return inp_col
