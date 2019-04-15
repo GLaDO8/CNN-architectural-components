@@ -10,7 +10,6 @@ def utility_pad(vector, pad_width, iaxis, kwargs):
 def apply_padding(inp_layer, pad_width = 1):
     return np.pad(inp_layer, pad_width, utility_pad, padder = 0)
 
-
 #kernel_size is the flat2d size of the kernel. No need to pass the number of kernel layers. Eg - (3x3), (11x11) so pass 3, 11
 def conv_indices(inp_layer, kernel_size, stride = 1, padding = 0):
     #check for padding
@@ -39,11 +38,16 @@ def imageToColumn(inp_layer, col_index, row_index, C):
     return inp_col
 
 #kernel is to be passed with the following shape params - (Knum, Kdepth, Kx, Ky)
-def kernelToRow(inp_layer, kernel, out_height, out_width, stride = 1):
+def kernelToRow(inp_layer, kernel, bias, out_height, out_width, stride = 1):
     Knum, Kdepth, Kx, Ky = kernel.shape[0], kernel.shape[1], kernel.shape[2], kernel.shape[3] 
     kernel.reshape(-1, Kdepth*Kx*Ky)
-    conv_out = np.matmul(kernel, inp_layer)/(Kx*Ky)
+    conv_out = (np.matmul(kernel, inp_layer) + bias)/(Kx*Ky)
     conv_out = conv_out.reshape(-1, out_height, out_width)
+    return conv_out
+
+def activation_func(conv_out, activation_type = "relu"):
+    if(activation_type == "relu"):
+        conv_out = np.where(conv_out < 0, 0, conv_out)
     return conv_out
 
 if __name__ == "__main__":
