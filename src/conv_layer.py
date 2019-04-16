@@ -57,12 +57,13 @@ def activation_func(conv_out, activation_type = "relu"):
     return conv_out
 
 def convolution2d(inp_layer, kernel, bias, stride = 1, padding = 0, activation_type = "relu"):
-    kernel = np.transpose(kernel)
+    #important to convert keras filter shape to a meaningful numpy shape
+    kernel = np.transpose(kernel, axes  = (3,2,0,1))
     padded_inp, col_index, row_index, out_height, out_width, C = conv_indices(inp_layer, kernel.shape[2])
     image_col = imageToColumn(padded_inp, col_index, row_index, C)
-    print(image_col)
     conv_out = kernelToRow(image_col, kernel, bias, out_height, out_width)
-    print(conv_out)
+    conv_out = activation_func(conv_out, activation_type)
+    return conv_out
 
 if __name__ == "__main__":
     kernel = np.load("layer_weights.npy")
