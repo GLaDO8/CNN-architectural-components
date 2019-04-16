@@ -2,7 +2,7 @@ from conv_layer import conv_indices
 import numpy as np
 
 #pooling function uses the same index generator 'conv_indices' from conv_layer
-def pooling(inp_layer, kernel_size, stride = 1, type = "max"):
+def pooling(inp_layer, kernel_size, padding = 0, stride = 1, type = "max"):
     inp_layer, col_index, row_index, out_height, out_width, C = conv_indices(inp_layer, kernel_size, stride = stride, padding = padding)
     pools = inp_layer[:, row_index, col_index]
     if(type == "avg"):
