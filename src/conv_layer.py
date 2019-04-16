@@ -1,5 +1,5 @@
 import numpy as np
-
+import matplotlib.pyplot as plt
 #utility functions for padding
 def utility_pad(vector, pad_width, iaxis, kwargs):
     pad_value = kwargs.get('padder', 10)
@@ -66,13 +66,9 @@ def convolution2d(inp_layer, kernel, bias, stride = 1, padding = 0, activation_t
     return conv_out
 
 if __name__ == "__main__":
-    kernel = np.load("layer_weights.npy")
-    inp_layer = np.random.randint(3, size=(2, 4, 4))
-    print(inp_layer)
-    kernel = np.random.randint(2, size = (4, 2, 3, 3))
-    print(kernel)
-    padded_inp, col_index, row_index, out_height, out_width, C = conv_indices(inp_layer, kernel.shape[2])
-    image_col = imageToColumn(padded_inp, col_index, row_index, C)
-    print(image_col)
-    conv_out = kernelToRow(image_col, kernel, out_height, out_width)
-    print(conv_out)
+    a = np.load("layer_weights.npy")
+    inp_layer = np.random.randint(3, size=(28, 28, 1))
+    plt.imshow(inp_layer.reshape(28,28))
+    inp_layer = inp_layer.reshape(1,28,28)
+    print(inp_layer.shape)
+    out1 = convolution2d(inp_layer, a[1][0], a[1][1].reshape(a[1][1].shape[0], 1), padding = 1)
