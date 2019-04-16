@@ -45,7 +45,7 @@ def imageToColumn(inp_layer, col_index, row_index, C):
 def kernelToRow(inp_layer, kernel, bias, out_height, out_width):
     Knum, Kdepth, Kx, Ky = kernel.shape[0], kernel.shape[1], kernel.shape[2], kernel.shape[3] 
     kernel = np.reshape(kernel, (-1, Kdepth*Kx*Ky))
-    conv_out = (np.matmul(kernel, inp_layer) + bias)/(Kx*Ky)
+    conv_out = (np.matmul(kernel, inp_layer) + bias)
     conv_out = conv_out.reshape(-1, out_height, out_width)
     return conv_out
 
